@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>comm.crawler</groupId>
+    <artifactId>crawler</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <maven.compiler.release>11</maven.compiler.release>
+    </properties>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.18.1</version>
+                    <configuration>
+                        <suiteXmlFiles>
+                            <!-- TestNG suite XML files -->
+                            <suiteXmlFile>testng.xml</suiteXmlFile>
+                        </suiteXmlFiles>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.webdriverextensions</groupId>
+                    <artifactId>webdriverextensions-maven-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <configuration>
+                        <drivers>
+                            <driver>
+                                <name>chromedriver</name>
+                                <platform>windows</platform>
+                                <bit>32</bit>
+                                <version>74.0.3729.6</version>
+                            </driver>
+                        </drivers>
+                        <installationDirectory>${project.basedir}/target/tmp_webdrivers</installationDirectory>
+                        <keepDownloadedWebdrivers>true</keepDownloadedWebdrivers>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>webdriver download</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>install-drivers</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.oracle.ojdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>19.3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-langdetect -->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-langdetect</artifactId>
+            <version>1.23</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
